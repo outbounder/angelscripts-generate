@@ -1,6 +1,6 @@
 {
   "name": "alphaproject",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
     "angelabilities": "0.0.2"
