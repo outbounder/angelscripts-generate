@@ -1,0 +1,8 @@
+{
+  "name": "alphaproject",
+  "dependencies": {
+    "organic-angel": "0.2.4",
+    "angelabilities": "*",
+    "ncp": "*"
+  }
+}
