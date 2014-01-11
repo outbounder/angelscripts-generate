@@ -11,18 +11,26 @@ module.exports = function(angel) {
     angel.series([
       function(angel, next){
         if(angel.cmdData.src.indexOf(".git") != -1) {
-          angel.cmdData.source_folder = angel.tempfolder()
-          angel.exec("git clone {src} {source_folder}", next)
+          angel.cmdData.sourceFolder = angel.fs.tempfolder()
+          angel.log("extracting via git clone at {sourceFolder}")
+          angel.exec("cd {sourceFolder}; git clone {src} .", next)
         } else {
-          angel.cmdData.source_folder = angel.cmdData.src
+          angel.cmdData.sourceFolder = angel.cmdData.src
           next()
         }
       },
-      angel.cp("source_folder", "dest", ["node_modules", ".git"]),
-      angel.chdir("dest"),
+      angel.fs.cp("sourceFolder", "dest", ["node_modules", ".git"]),
+      function(angel, next){
+        if(angel.cmdData.src.indexOf(".git") != -1) {
+          angel.log("removing {sourceFolder}")
+          angel.exec("rm -rf {sourceFolder}", next)
+        } else
+          next()
+      },
+      angel.fs.chdir("dest"),
       angel.exec("git init ."),
-      angel.exec("npm init")
+      angel.stdin(angel.exec("npm init"))
     ], next)
   })
-  .example("angel new project testProjectName")
+  .example("angel alpha testProjectName git://...")
 }
