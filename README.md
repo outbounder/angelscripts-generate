@@ -1,5 +1,5 @@
-# alphaproject
+# angelscripts-generate
 
-angel script for generation of alpha projects
+angel script for generation of projects using directory or repository as template
 
-    angel alpha :name :src
+    angel generate :name :src

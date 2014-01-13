@@ -1,13 +1,19 @@
 {
-  "name": "alphaproject",
+  "name": "angelscripts-generate",
   "version": "0.0.1",
   "main": "index.js",
   "dependencies": {
-    "angelabilities": "0.0.2"
+    "angelabilities": "0.0.3",
+    "gulp": "~3.3.2",
+    "gulp-template": "~0.1.0",
+    "shelljs": "~0.2.6"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/outbounder/alphaproject.git"
+    "url": "https://github.com/outbounder/angelscripts-generate.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp-replace": "~0.2.0"
+  }
 }
