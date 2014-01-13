@@ -15,7 +15,7 @@ module.exports = function(angel) {
     if(angel.cmdData.src.indexOf(".git") != -1) {
       angel.cmdData.sourceFolder = angel.fs.tempfolder()
       angel.log("extracting via git clone at {sourceFolder}")
-      shelljs.exec(angel.format("cd {sourceFolder}; git clone {src}"))
+      shelljs.exec(angel.format("cd {sourceFolder}; git clone {src} ."))
     } else 
       angel.cmdData.sourceFolder = angel.cmdData.src
     var stream = gulp.src([angel.cmdData.sourceFolder+"/**/*","!node_modules", "!.git"])
