@@ -30,8 +30,7 @@ module.exports = function(angel) {
         }
         shelljs.cd(angel.cmdData.dest)
         shelljs.exec("git init .")
-        var child = shelljs.exec("npm init .", {async: true})
-        process.stdin.pipe(child.stdin)
+        shelljs.exec("npm install")
       })
   })
   .example("generate testProjectName git://...")
