@@ -18,7 +18,11 @@ module.exports = function(angel) {
       shelljs.exec(angel.format("cd {sourceFolder}; git clone {src} ."))
     } else 
       angel.cmdData.sourceFolder = angel.cmdData.src
-    var stream = gulp.src([angel.cmdData.sourceFolder+"/**/*","!node_modules", "!.git"])
+    var stream = gulp.src([
+      angel.cmdData.sourceFolder+"/**/*", 
+      "!node_modules", 
+      "!.git"
+    ], {dot: true})
     for(var key in angel.cmdData)  
       stream = stream.pipe(replace(new RegExp("{"+key+"}", "g"), angel.cmdData[key]))
     stream.pipe(gulp.dest(angel.cmdData.dest))
@@ -26,9 +30,13 @@ module.exports = function(angel) {
         if(angel.cmdData.src.indexOf(".git") != -1) {
           angel.cmdData.sourceFolder = angel.fs.tempfolder()
           angel.log("removing {sourceFolder}")
-          shelljs.exec("rm -rf {sourceFolder}")
+          shelljs.exec(angel.format("rm -rf {sourceFolder}"))
         }
         shelljs.cd(angel.cmdData.dest)
+        // need this because gulp.src above doesn't excludes node_modules and git --
+        shelljs.exec("rm -rf ./.git")
+        shelljs.exec("rm -rf ./node_modules")
+        // <--
         shelljs.exec("git init .")
         shelljs.exec("npm install")
       })
