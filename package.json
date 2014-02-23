@@ -1,6 +1,6 @@
 {
   "name": "angelscripts-generate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "dependencies": {
     "angelabilities": "0.0.3",
