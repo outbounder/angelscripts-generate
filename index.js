@@ -24,7 +24,7 @@ module.exports = function(angel) {
       "!.git"
     ], {dot: true})
     for(var key in angel.cmdData)  
-      stream = stream.pipe(replace(new RegExp("{"+key+"}", "g"), angel.cmdData[key]))
+      stream = stream.pipe(replace(new RegExp("<{{"+key+"}}>", "g"), angel.cmdData[key]))
     stream.pipe(gulp.dest(angel.cmdData.dest))
       .on("end", function(){
         if(angel.cmdData.src.indexOf(".git") != -1) {
@@ -41,5 +41,5 @@ module.exports = function(angel) {
         shelljs.exec("npm install")
       })
   })
-  .example("generate testProjectName git://...")
+  .example("generate testProjectName <git url or folder path>")
 }
